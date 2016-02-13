@@ -1,0 +1,9 @@
+$(document).ready(function () {
+    $(function(){
+        $('.edit').on('click', function(e){
+            e.preventDefault();
+            var id = $(this).attr('id');
+            $(this).next('.edit-form '+id).show();
+        });
+    });
+});
