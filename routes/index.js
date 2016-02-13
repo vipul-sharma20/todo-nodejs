@@ -13,7 +13,8 @@ exports.index = function(req, res){
 exports.create = function ( req, res ){
   new Todo({
     content    : req.body.content,
-    updated_at : Date.now()
+    updated_at : Date.now(),
+    place      : req.body.place
   }).save( function( err, todo, count ){
     res.redirect( '/' );
   });
@@ -45,6 +46,17 @@ exports.update = function ( req, res ){
     todo.updated_at = Date.now();
     todo.save( function ( err, todo, count ){
       res.redirect( '/' );
+    });
+  });
+};
+
+// edit item
+exports.edit = function ( req, res ){
+  Todo.find( function ( err, todos ){
+    res.render( 'index', {
+        title   : 'Todo',
+        todos   : todos,
+        current : req.params.id
     });
   });
 };
