@@ -32,11 +32,11 @@ if ('development' == app.get('env')) {
 }
 
 app.post( '/create', routes.create );
-//app.get( '/destroy/:id', routes.destroy );
+app.get( '/destroy/:id', routes.destroy );
 app.get('/', routes.index);
 //app.get('/users', user.list);
-//app.get( '/edit/:id', routes.edit );
-//app.post( '/update/:id', routes.update );
+app.get( '/edit/:id', routes.edit );
+app.post( '/update/:id', routes.update );
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

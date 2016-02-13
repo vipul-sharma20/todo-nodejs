@@ -3,15 +3,38 @@
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="/javascripts/todo_app.js"></script>
   </head>
   <body>
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
     <form action="/create" method="post" accept-charset="utf-8">
           <input type="text" name="content" />
+          <div id="locationField">
+              <input id="autocomplete" placeholder="Enter your address"
+             onFocus="geolocate()" type="text" name="place"></input>
+
+    </div>
+    <input type="submit" value="Submit">
     </form>
-    <% todos.forEach( function( todo ){ %>
-      <p><%= todo.content %></p>
-      <% }); %>
+    <% todos.forEach( function ( todo ){ %>
+    <p>
+      <!-- <form action="/update/<%= todo._id %>" method="post" accept-charset="utf-8">
+        <input type="text" name="content" value="<%= todo.content %>" />
+      </form>
+        <a href="/edit/<%= todo._id %>" title="Update this todo item"><%= todo.content %></a> -->
+      <span>
+        <a href="/edit/<%= todo._id %>" title="Update this todo item"><%= todo.content %></a>
+      </span>
+      <span>
+        <a href="/destroy/<%= todo._id %>" title="Delete this todo item">Delete</a>
+      </span>
+    </p>
+    <% }); %>
+
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAYUH_UfVLTcuCugP52g7jQxBVrKUYsGUM&signed_in=true&libraries=places&callback=initAutocomplete"
+        async defer></script>
+
   </body>
 </html>
