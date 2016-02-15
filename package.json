@@ -1,14 +1,28 @@
 {
-  "name": "Todo",
+  "name": "todo",
   "version": "0.0.1",
   "private": true,
   "scripts": {
     "start": "node app.js"
   },
   "dependencies": {
-    "express": "3.4.7",
-    "ejs": "*"
+    "ejs": "*",
+    "express": "4.13.4",
+    "foreman": "1.4.1"
   },
-    "ejs-locals" : "1.0.2",
-    "mongoose"   : "3.8.1"
+  "ejs-locals": "1.0.2",
+  "mongoose": "3.8.1",
+  "main": "app.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vipul-sharma20/todo-nodejs.git"
+  },
+  "author": "Vipul Sharma",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vipul-sharma20/todo-nodejs/issues"
+  },
+  "homepage": "https://github.com/vipul-sharma20/todo-nodejs#readme",
+  "description": "Todo App"
 }

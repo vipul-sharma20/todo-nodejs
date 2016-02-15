@@ -72,7 +72,7 @@ function geolocate() {
 
 function setupAutocomplete(autocomplete, input) {
   autocomplete_id = new google.maps.places.Autocomplete(document.getElementById('autocomplete-'+input), { types: [ 'geocode' ] });
-  google.maps.event.addListener(autocomplete2, 'place_changed', function() {
+  google.maps.event.addListener(autocomplete_id, 'place_changed', function() {
     fillInAddress();
   });
 }

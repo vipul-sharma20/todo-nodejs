@@ -3,38 +3,59 @@
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/bootstrap-datetimepicker.min.css' />
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="/javascripts/todo_place.js"></script>
     <script src="/javascripts/todo_app.js"></script>
+    <script src="/javascripts/bootstrap-datetimepicker.min.js"></script>
   </head>
   <body>
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
     <form action="/create" method="post" accept-charset="utf-8">
-          <input type="text" name="content" />
+          <input type="text" name="content" placeholder="Task" required/>
           <div id="locationField">
-              <input id="autocomplete" placeholder="Enter your address"
+              <input id="autocomplete" placeholder="Location"
              onFocus="geolocate()" type="text" name="place"></input>
+          </div>
+          <input id="event-date" type="datetime-local" name="event_at">
 
-    </div>
-    <input type="submit" value="Submit">
+          <input type="submit" value="Submit">
     </form>
+    <hr>
+
     <% todos.forEach( function ( todo ){ %>
-    <p>
-      <span>
-        <a href="#" class="edit-todo" id="<%= todo._id %>" title="Update this todo item"><%= todo.content %></a>
-      </span>
-      <form class="edit-form-<%= todo._id %>" action="/update/<%= todo._id %>" method="post" accept-charset="utf-8" style="display:none;">
-        <input type="text" name="content" value="<%= todo.content %>" />
-        <div id="locationField">
-        <input id="autocomplete-<%= todo._id %>" placeholder="Enter your address"
-             onFocus="geolocate()" type="text" name="place" value="<%= todo.place %>"></input>
-        </div>
-      </form>
-      <span>
+        
+        <% if(todo.closed){ %>
+          <p><b>Task:</b> <strike><%= todo.content %></strike></p>
+          <p><b>Location:</b> <strike><%= todo.place %></strike></p>
+          <p><b>At:</b> <strike><%= todo.event_at %></strike></p>
+        <% } else{ %>
+          <p><b>Task:</b> <%= todo.content %></p>
+          <p><b>Location:</b> <%= todo.place %></p>
+          <p><b>At:</b> <%= todo.event_at %></p>
+        <% } %>
+
+
+        <a href="#" class="edit-todo" id="<%= todo._id %>" title="Update this todo item">Edit</a>
+        <a href="/close/<%= todo._id %>" title="Close this todo item">Close/Open</a>
         <a href="/destroy/<%= todo._id %>" title="Delete this todo item">Delete</a>
-      </span>
-    </p>
+        <form action="/snooze/<%= todo._id %>" id="<%= todo._id %>" method="post">
+          <input type="submit" value="Snooze">
+        </form>
+      
+        <form class="edit-form-<%= todo._id %>" action="/update/<%= todo._id %>" method="post" accept-charset="utf-8" style="display:none;">
+          <label>Task: </label>
+          <input type="text" name="content" value="<%= todo.content %>" />
+          <label>Location: </label>
+          <div id="locationField">
+            <input id="autocomplete-<%= todo._id %>" placeholder="Enter your address"
+             onFocus="geolocate()" type="text" name="place" value="<%= todo.place %>"></input>
+          </div>
+          <input id="event-date" type="datetime-local" name="event_at">
+          <input type="submit" value="Submit">
+        </form>
+        <hr>
     <% }); %>
 
 
