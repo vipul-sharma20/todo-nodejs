@@ -10,7 +10,6 @@ var user = require('./routes/user');
 var http = require('http');
 var path = require('path');
 var engine  = require( 'ejs-locals' );
-var jsdom=require('jsdom');
 var $ = require('jquery');
 var app = express();
 
